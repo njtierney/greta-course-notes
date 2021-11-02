@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-This is the course repository for the course, "An introduction to Bayesian modelling using `greta`".
+This is the course repository for the course, "An introduction to Bayesian modelling using `greta`", run on November 16 + 17 through the stat society of australia ([course advertisement](https://www.statsoc.org.au/event-4472476)).
 
 This course is designed for those who want to learn how to do Bayesian modelling using the `greta` software. We assume users have the following background/experience:
 
