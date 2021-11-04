@@ -11,7 +11,7 @@ library(tidyverse)
 head(penguins)
 
 
-# before we can fit a model, we need to tidy uupu the data and transform some variables
+# before we can fit a model, we need to tidy up the data and transform some variables
 penguins_for_modelling <- penguins %>%
   # remove missing value records
   drop_na() %>%
