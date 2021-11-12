@@ -6,10 +6,11 @@ library(tidyverse)
 
 # this is a thing people do
 # https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081
-
+# Ther eis some really nice data extracted from this paper
+# It also has some great artwork:
+# https://github.com/allisonhorst/palmerpenguins#artwork
 # here's the data from that paper
 head(penguins)
-
 
 # before we can fit a model, we need to tidy up the data and transform some variables
 penguins_for_modelling <- penguins %>%
@@ -19,13 +20,31 @@ penguins_for_modelling <- penguins %>%
   # to define
   mutate(
     across(
-      c(ends_with("mm"), ends_with("g")),
+      c(bill_length_mm,
+        bill_depth_mm,
+        flipper_length_mm,
+        body_mass_g),
       .fns = list(scaled = ~scale(.x))
     ),
     # code the sex as per a Bernoulli distribution
     is_female_numeric = if_else(sex == "female", 1, 0),
     .after = island
   )
+
+## an aside - if you haven't seen `across` before, here is what it is
+## equivalent to:
+    ## penguins %>%
+    ##   # remove missing value records
+    ##   drop_na() %>%
+    ##   # rescale the length and mass variables to make the coefficient priors easier
+    ##   # to define
+    ##   mutate(
+    ##       bill_length_mm_scaled = scale(bill_length_mm_scaled),
+    ##       bill_depth_mm_scaled = scale(bill_depth_mm_scaled),
+    ##       flipper_length_mm_scaled = scale(flipper_length_mm_scaled),
+    ##       body_mass_g_scaled = scale(body_mass_g_scaled)
+    ##     )
+    ##   )
 
 # this is the model we are going to fit to start with:
 
@@ -81,3 +100,7 @@ coda::gelman.diag(draws, autoburnin = FALSE, multivariate = FALSE)
 
 # look at the parameter estimates
 summary(draws)
+
+# bayesplot
+## Look into PPCs:
+## https://cran.r-project.org/web/packages/bayesplot/vignettes/graphical-ppcs.html
