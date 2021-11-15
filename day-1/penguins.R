@@ -97,6 +97,10 @@ draws <- mcmc(m)
 # visualise the MCMC traces
 plot(draws)
 
+# we can also use bayesplot to explore the convergence of the model
+mcmc_trace(draws)
+mcmc_dens(draws)
+
 # check convergence (we already discarded burn-in and don't need the
 # multivariate stat)
 coda::gelman.diag(draws, autoburnin = FALSE, multivariate = FALSE)
@@ -104,8 +108,7 @@ coda::gelman.diag(draws, autoburnin = FALSE, multivariate = FALSE)
 # look at the parameter estimates
 summary(draws)
 
-# bayesplot
-## Look into PPCs:
+## Posterior predictive check
 
 # we want to see how well the data match the predictions from the model that
 # we have fit
