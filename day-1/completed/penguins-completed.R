@@ -87,8 +87,7 @@ coda::gelman.diag(draws, autoburnin = FALSE, multivariate = FALSE)
 # look at the parameter estimates
 summary(draws)
 
-
-
+## doing prediction
 # predict to a new dataset - first the marginal effect of body mass on the link
 # scale
 

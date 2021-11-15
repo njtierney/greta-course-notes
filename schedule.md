@@ -29,17 +29,34 @@ End times:
 10am - 10:30am
 
 - Introductions, code of conduct
-- Motivation 
- - Why learn this over other Bayes approaches (or even `lm()`)
-- Setup on RStudio Cloud
+- Motivation & demonstration
+- Setup on RStudio cloud
+
+10:30am - 12pm
+
+- Introduction to `greta`
+- Working through exercises/code on rstudio cloud
+- Working through extensions
 
 12pm - 12:30pm: break
+
+12:30 - 3:30pm
+
+- Extensions:
+  - Adding other variables into the model
+  - Workflows for exploring convergence
+
+- Understanding prediction and using `greta`'s `calculate` function
+- Posterior and prior predictive checks
+
+- extra exercises and extensions
+- Canvas group to explore potential key topics and extensions for the next day
 
 3:30pm - 4pm: Wrap up and finish
 
 ## Day 2
 
-10am - 10:30am
+10am - 10:30am: recap
 
 12pm - 12:30pm: break
 
