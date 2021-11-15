@@ -82,11 +82,14 @@ eta <- intercept +
 probability_female <- ilogit(eta)
 
 # define likelihood
-distribution(penguins_for_modelling$is_female_numeric) <- bernoulli(probability_female)
-
+y <- as_data(penguins_for_modelling$is_female_numeric)
+# distribution(penguins_for_modelling$is_female_numeric) <- bernoulli(probability_female)
+distribution(y) <- bernoulli(probability_female)
 
 # combine into a model object
 m <- model(intercept, coef_flipper_length, coef_body_mass)
+
+plot(m)
 
 # do MCMC - 4 chains, 1000 on each after 1000 warmuup (the default)
 draws <- mcmc(m)
@@ -101,6 +104,4 @@ coda::gelman.diag(draws, autoburnin = FALSE, multivariate = FALSE)
 # look at the parameter estimates
 summary(draws)
 
-# bayesplot
-## Look into PPCs:
-## https://cran.r-project.org/web/packages/bayesplot/vignettes/graphical-ppcs.html
+# Instructors proceed with live coding
