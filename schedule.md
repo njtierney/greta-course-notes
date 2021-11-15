@@ -1,11 +1,27 @@
 # Schedule
 
-Times are in WA time zone, here are the following 5(!) time zone start times:
+This course runs over two days:
 
-Tuesday 16th November
-Wednesday 17th November
+- Tuesday 16th November
+- Wednesday 17th November
 
-10am start (WA time)
+Times are in WA time zone, here are the following 5(!) start and end times:
+
+Start times:
+
+- 10am (Perth Time)
+- 12:30pm (Adelaide Time)
+- 11:30am (Darwin Time)
+- 1pm (Melbourne Time)
+- 12pm (Brisbane Time)
+
+End times:
+
+- 2pm (Perth Time)
+- 4:30pm (Adelaide Time)
+- 3:30pm (Darwin Time)
+- 5pm (Melbourne Time)
+- 4pm (Brisbane Time)
 
 
 ## Day 1
