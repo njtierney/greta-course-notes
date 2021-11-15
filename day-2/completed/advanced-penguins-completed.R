@@ -26,9 +26,9 @@ penguins_for_modelling <- penguins %>%
 # create numeric codes for the categorical variables we'd like to specify a hierarchical model over
 all_species <- unique(as.character(penguins_for_modelling$species))
 n_species <- length(all_species)
-species_index <- match(species, all_species)
+species_index <- match(penguins_for_modelling$species, all_species)
 
-# define a hierarchical random-intercept model
+# define a hierarchical random-intercepts and random-slopes model
 library(greta)
 
 # define non-hierarchical priors
@@ -50,6 +50,19 @@ species_intercepts <- intercept_mean + intercept_sd * species_intercepts_raw
 # vector of three intercepts
 intercept <- species_intercepts[species_index]
 
+# and the same for the slopes, for each coefficient
+coef_flipper_length_mean <- normal(0, 10)
+coef_flipper_length_sd <- normal(0, 1, truncation = c(0, Inf))
+coef_species_flipper_length_raw <- normal(0, 1, dim = n_species)
+coef_species_flipper_length <- coef_flipper_length_mean + coef_flipper_length_sd * coef_species_flipper_length_raw
+coef_flipper_length <- coef_species_flipper_length[species_index]
+
+coef_body_mass_mean <- normal(0, 10)
+coef_body_mass_sd <- normal(0, 1, truncation = c(0, Inf))
+coef_species_body_mass_raw <- normal(0, 1, dim = n_species)
+coef_species_body_mass <- coef_body_mass_mean + coef_body_mass_sd * coef_species_body_mass_raw
+coef_body_mass <- coef_species_body_mass[species_index]
+
 # define linear predictor
 eta <- intercept +
   coef_flipper_length * penguins_for_modelling$flipper_length_mm_scaled +
@@ -63,11 +76,18 @@ y <- as_data(penguins_for_modelling$is_female_numeric)
 distribution(y) <- bernoulli(probability_female)
 
 # combine into a model object
-m <- model(intercept_mean, intercept_sd, coef_flipper_length, coef_body_mass)
+m <- model(intercept_mean, intercept_sd,
+           coef_flipper_length_mean, coef_flipper_length_sd,
+           coef_body_mass_mean, coef_body_mass_sd)
 
-# do MCMC - 4 chains, 1000 on each after 1000 warmuup (the default)
+# do MCMC - 4 chains, 1000 on each after 1000 warmup (the default)
 draws <- mcmc(m)
 
 plot(draws)
 
-plot(calculate(species_intercepts, values = draws))
+plot(calculate(coef_species_body_mass, values = draws))
+
+
+
+
+# fitting a linear model with a design matrix and formula interface

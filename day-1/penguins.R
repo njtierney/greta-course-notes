@@ -6,7 +6,7 @@ library(tidyverse)
 
 # this is a thing people do
 # https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081
-# Ther eis some really nice data extracted from this paper
+# There is some really nice data extracted from this paper
 # It also has some great artwork:
 # https://github.com/allisonhorst/palmerpenguins#artwork
 # here's the data from that paper
