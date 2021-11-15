@@ -33,7 +33,6 @@ End times:
  - Why learn this over other Bayes approaches (or even `lm()`)
 - Setup on RStudio Cloud
 
-
 12pm - 12:30pm: break
 
 3:30pm - 4pm: Wrap up and finish
