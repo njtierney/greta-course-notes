@@ -91,3 +91,48 @@ plot(calculate(coef_species_body_mass, values = draws))
 
 
 # fitting a linear model with a design matrix and formula interface
+
+# R's formula interface is a really nice way of:
+# a) setting up all the covariates and interactions we want to model,
+# b) converting categorical variables into separate columns of dummy variables,
+# b) taking care of identifiability in those combinations (with contrasts)
+# we can use it to quickly set up a matrix of covariates to use in modelling:
+covariates <- model.matrix(
+  ~ species * bill_length_mm_scaled +
+    species * bill_depth_mm_scaled +
+    species * flipper_length_mm_scaled +
+    species * body_mass_g_scaled,
+  data = penguins_for_modelling
+)
+
+dim(covariates)
+head(covariates)
+
+
+n_covariates <- ncol(covariates)
+
+# we can then specify our coefficients as a vector to combine with these:
+coef <- normal(0, 10, dim = n_covariates)
+
+# the matrix multiply operator handles multiplying each coefficient by each
+# covariate and then summing across the rows to get the linear predictor for
+# each observation
+eta <- covariates %*% coef
+
+# apply link function
+probability_female <- ilogit(eta)
+
+# define likelihood
+y <- as_data(penguins_for_modelling$is_female_numeric)
+distribution(y) <- bernoulli(probability_female)
+
+m <- model(coef)
+
+draws <- mcmc(m)
+
+plot(draws)
+coda::gelman.diag(draws, autoburnin = FALSE, multivariate = FALSE)
+
+# The downside of this is that we lose some control over our model - it becomes
+# difficult to specify meaningful priors or encode hierarchical structure as
+# part of this. It can be handy for setting up a part of a larger model however.
