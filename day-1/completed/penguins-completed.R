@@ -50,9 +50,9 @@ summary(non_bayesian_model)
 library(greta)
 
 # define priors
-intercept <- normal(0, 10)
-coef_flipper_length <- normal(0, 10)
-coef_body_mass <- normal(0, 10)
+intercept <- normal(0, 1000)
+coef_flipper_length <- normal(0, 1000)
+coef_body_mass <- normal(0, 1000)
 
 # define linear predictor
 eta <- intercept +
@@ -63,11 +63,14 @@ eta <- intercept +
 probability_female <- ilogit(eta)
 
 # define likelihood
-distribution(penguins_for_modelling$is_female_numeric) <- bernoulli(probability_female)
-
+# distribution(penguins_for_modelling$is_female_numeric) <- bernoulli(probability_female)
+y <- as_data(penguins_for_modelling$is_female_numeric)
+distribution(y) <- bernoulli(probability_female)
 
 # combine into a model object
 m <- model(intercept, coef_flipper_length, coef_body_mass)
+
+plot(m)
 
 # do MCMC - 4 chains, 1000 on each after 1000 warmuup (the default)
 draws <- mcmc(m)
@@ -244,7 +247,7 @@ str(y)
 # TODO explain unpacking this
 # sims_y_mat <- sims_model$y
 # dim(sims_y_mat) <- c(500, 333)
-yrep_matrix <- sims_model$y[,,1]
+yrep_matrix <- sims_model$y[ , ,1]
 y_values <- as.integer(y)
 
 ## distribution of test statistics
@@ -302,12 +305,16 @@ ppc_stat_grouped(y_values,
 
 # how to check your priors
 sims_params_prior <- calculate(
+  probability_female[1,],
+  eta[1,],
   intercept,
   coef_flipper_length,
   coef_body_mass,
   nsim = 500
 )
 
+hist(sims_params_prior$`probability_female[1, ]`)
+hist(sims_params_prior$`eta[1, ]`)
 hist(sims_params_prior$intercept)
 hist(sims_params_prior$coef_flipper_length)
 hist(sims_params_prior$coef_body_mass)

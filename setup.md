@@ -16,11 +16,10 @@ like the following:
 3. Restart R
 4. `library(greta)`
 5. `install_greta_deps()`
-6. `install.packages("remotes")`
-7. `remotes::install_version("tensorflow", version = "2.6.0")` (current workaround a recent issue with tensorflow)
-8. Follow the prompts from here:
+6. `remotes::install_version("tensorflow", version = "2.6.0")` (current workaround a recent issue with tensorflow)
+7. Follow the prompts from here:
   - Restart R
-9. Check that you can fit a model with code like:
+8. Check that you can fit a model with code like:
 
 ```r
 library(greta)
