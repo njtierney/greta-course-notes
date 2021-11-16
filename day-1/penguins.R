@@ -82,9 +82,7 @@ eta <- intercept +
 probability_female <- ilogit(eta)
 
 # define likelihood
-y <- as_data(penguins_for_modelling$is_female_numeric)
-# distribution(penguins_for_modelling$is_female_numeric) <- bernoulli(probability_female)
-distribution(y) <- bernoulli(probability_female)
+distribution(penguins_for_modelling$is_female_numeric) <- bernoulli(probability_female)
 
 # combine into a model object
 m <- model(intercept, coef_flipper_length, coef_body_mass)
