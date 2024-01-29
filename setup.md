@@ -1,6 +1,6 @@
 # Setup
 
-We will be running the course on RStudio cloud. This is so all required packages and software versions are pre-installed.
+We will be running the course on RStudio (Posit) cloud. This is so all required packages and software versions are pre-installed.
 
 Before the course starts here is what you need to do:
 
@@ -8,17 +8,26 @@ Before the course starts here is what you need to do:
 
 ## Installing `greta` on your local machine.
 
-We have recently improved how `greta` is installed. From scratch, installing `greta` should look
-like the following:
+We have recently improved how `greta` is installed. From scratch, installing `greta` should look like the following:
 
 1. `install.packages("remotes")`
 2. `remotes::install_github("greta-dev/greta")`
 3. Restart R
 4. `library(greta)`
 5. `install_greta_deps()`
-6. `remotes::install_version("tensorflow", version = "2.6.0")` (current workaround a recent issue with tensorflow)
-7. Follow the prompts from here:
+6. Follow the prompts from here:
   - Restart R
+7. Check that greta is installed with:
+
+```r
+greta::greta_sitrep()
+```
+
+This should give you a happy message like:
+
+```
+```
+
 8. Check that you can fit a model with code like:
 
 ```r
@@ -27,8 +36,3 @@ normal(0,1)
 m <- model(normal(0,1))
 mcmc(m)
 ```
-
-## Note on using M1 macs
-
-There are current known issues around installing `greta` on M1 macs. 
-Unfortunately at the moment we do not 
