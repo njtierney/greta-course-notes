@@ -1,7 +1,7 @@
 library(palmerpenguins)
 library(tidyverse)
 library(bayesplot)
-
+library(DiagrammeR)
 # we are going to build a model to predict the sex of an individual penguin
 # based on measurements of that individual.
 
@@ -131,7 +131,7 @@ sims <- calculate(
 
 penguins_prediction <- sims$probability_female_pred[, , 1] %>%
   t() %>%
-  as_tibble() %>%
+  as_tibble(.name_repair = "unique") %>%
   set_names(paste0("sim_", seq_len(n_sims))) %>%
   bind_cols(
     penguins_for_prediction,
@@ -173,7 +173,7 @@ penguins_prediction_body_mass_conditional_summary %>%
       colour = sim
     ),
     data = penguins_prediction_body_mass_conditional,
-    size = 0.1
+    linewidth = 0.1
   ) +
   geom_ribbon(
     aes(
