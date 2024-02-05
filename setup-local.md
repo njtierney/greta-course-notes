@@ -6,14 +6,50 @@ This course will be run on RStudio (Posit) cloud. This is so all required packag
 
 From scratch, installing `greta` should look like the following:
 
-1. `install.packages("remotes")` # install 
-2. `remotes::install_github("greta-dev/greta")` # 
-3. Restart R
-4. `library(greta)`
-5. `install_greta_deps()`
-6. Follow the prompts from here:
-7. Restart R
-8. Check that greta is installed with:
+```r
+# if you haven't installed the remotes package already
+# this is a package that helps you install packages from 
+# github onto your machine
+# install.packages("remotes")
+```
+
+Then, install the development version of greta for this course
+
+```r
+remotes::install_github("njtierney/greta@tf2-gc")
+```
+
+Then, load greta:
+
+```r
+library(greta)
+```
+
+Install dependencies:
+
+```r
+install_greta_deps()
+```
+
+Watch the prompts as greta installs! You should end up with something like this:
+
+```
+> install_greta_deps()
+✔ Python modules installed!               
+• To see full installation notes run:
+• `greta_notes_conda_install_output()`
+• To see any error messages, run:
+• `greta_notes_conda_install_error()`
+✔ Installation of greta dependencies is complete!
+• Restart R, then load greta with:
+`library(greta)`
+```
+
+Following these instructions then:
+
+Restart R
+
+Now check greta is installed with:
 
 ```r
 greta::greta_sitrep()
@@ -35,7 +71,7 @@ This should give you a happy message like:
 
 Note that there __might__ be some angry red test mentioning cuDNN/cuFFT/cuBLAS. This is related to GPUs - CUDA graphics card setup. It will not impact your use of greta during the course.
 
-9. Check that you can fit a model with code like:
+Check that you can fit a model with code like:
 
 ```r
 library(greta)
@@ -49,12 +85,9 @@ If you get some output that looks [like the output here](https://gist.github.com
 
 Then you are good to go!
 
-
 ## Installation details
 
-The reason there are these extra installation steps is that greta uses Google's TensorFlow and the tensorflow-probability python modules under the hood. 
-
-To assist with installing these Python modules, greta provides an installation helper, `install_greta_deps()`.
+The reason there are these extra installation steps is that greta uses Google's TensorFlow and the tensorflow-probability python modules under the hood.  To assist with installing these Python modules, greta provides an installation helper, `install_greta_deps()`.
 
 This installs the exact pythons package versions needed, and places these inside a "greta-env" conda environment. 
 
