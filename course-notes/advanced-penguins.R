@@ -26,7 +26,7 @@ penguins_for_modelling <- penguins %>%
 # create numeric codes for the categorical variables we'd like to specify a hierarchical model over
 all_species <- unique(as.character(penguins_for_modelling$species))
 n_species <- length(all_species)
-species_index <- match(species, all_species)
+species_index <- match(penguins_for_modelling$species, all_species)
 
 # define a hierarchical random-intercept model
 library(greta)
@@ -63,9 +63,10 @@ y <- as_data(penguins_for_modelling$is_female_numeric)
 distribution(y) <- bernoulli(probability_female)
 
 # combine into a model object
-m <- model(intercept_mean, intercept_sd, coef_flipper_length, coef_body_mass)
+m <- model(intercept_mean, intercept_sd,
+           coef_flipper_length, coef_body_mass)
 
-# do MCMC - 4 chains, 1000 on each after 1000 warmuup (the default)
+# do MCMC - 4 chains, 1000 on each after 1000 warmup (the default)
 draws <- mcmc(m)
 
 plot(draws)
