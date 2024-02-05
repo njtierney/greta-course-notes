@@ -7,23 +7,25 @@ This course runs over one day, Wednesday 7th February 2024, from 9am - 4:30pm.
 - Acknowledgement of country
 - Introductions, [code of conduct](code-of-conduct.md)
 - Introduction to `greta`
-- Setup on RStudio cloud
+- Setup on Posit cloud
 - Installation handling:
   - For those who want to install on their local machine
   - We may need users to use the cloud instance if we run out of time to assist
     with local installation
-- Code along demonstration
+- Start running through logistic regression code in `penguins.R` on Posit Cloud
 
 ## 10am - 10:20am
 
-- break
+- Break
 
 ## 10:20am - 12pm
 
-- Working through exercises/code on rstudio cloud
-- Working through extension exercises:
-  - Adding other variables into the model
-  - Workflows for exploring convergence
+- Finish running through logistic regression code in `penguins.R` on Posit Cloud
+- Exercises:
+  - Add other variables into the model
+  - Modify priors
+  - Stretch: defining a non-linear/weird model equation
+- Live coding: using `greta`'s `calculate()` function to making posterior predictions
 
 ## 12pm - 1pm: 
 
@@ -32,16 +34,18 @@ This course runs over one day, Wednesday 7th February 2024, from 9am - 4:30pm.
 
 ## 1pm - 2:40pm
 
-- Finish off extension exercises
-- Understanding prediction and using `greta`'s `calculate` function
-- Posterior and prior predictive checks
-- Canvas group to regarding discussion of individual analysis needs
+- Live coding: posterior and prior predictive checking workflow
+- Canvas group re. individual analysis needs to discuss
+- Running through hierarchical regression code in `advanced-penguins.R`
 
-## 2:40 - 3pm: break
+## 2:40 - 3pm:
+
+ - Break
 
 ## 3 - 4:20pm
 
-- Extra exercises and extensions
+- Live coding: add hierarchical slopes to `advanced-penguins.R`
+- Live coding: use R's formula interface to build design matrices
 - Work on individual analyses discussed in previous session
 
 ## 4:20 - 4:30pm
