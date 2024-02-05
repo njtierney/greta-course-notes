@@ -32,11 +32,13 @@ use_course("https://github.com/njtierney/greta-course-notes/archive/refs/heads/m
 
 Alternatively you can download the repository details by forking the repo, or pasting the above URL into the address bar of a browser.
 
-
 ## Schedule
 
 The course will be delivered in person, see the [schedule](schedule.md) for more information.
 
 ## Setup & Installation
 
-See the [setup](setup.md) instructions for details on how to install greta locally and in posit cloud.
+For instructions on installation see:
+
+- [Cloud installation](setup-cloud.md)
+- [Local installation](setup-local.md)
