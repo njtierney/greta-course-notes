@@ -1,7 +1,6 @@
 library(palmerpenguins)
 library(tidyverse)
 library(bayesplot)
-library(DiagrammeR)
 
 # we are going to build a model to predict the sex of an individual penguin
 # based on measurements of that individual.
@@ -266,11 +265,8 @@ str(y)
 # What we require here is a matrix
 # where the rows are the number of draws
 # and the columns are the number of observations
-# this object is actully a 3 dimensional array.
+# this object is actually a 3 dimensional array.
 # We want to keep everything in the first two
-# TODO explain unpacking this
-# sims_y_mat <- sims_model$y
-# dim(sims_y_mat) <- c(500, 333)
 yrep_matrix <- sims_model$y[ , ,1]
 y_values <- as.integer(y)
 
@@ -290,10 +286,11 @@ ppc_stat(y_values,
          stat = "prop_ones",
          binwidth = 0.005)
 
+# we can split this by grouping variables to look for things missing from our model
 ppc_stat_grouped(y_values,
                  yrep_matrix,
                  stat = "prop_ones",
-                 penguins_for_modelling$sex,
+                 penguins_for_modelling$island,
                  binwidth = 0.005)
 
 # there are other uses of PPC
@@ -310,38 +307,33 @@ sims_prior <- calculate(
 
 yrep_prior_matrix <- sims_prior$y[,,1]
 
-## distribution of test statistics
-
-# we define a function that tells us the proportion of ones
 # We can visualise the proportion of ones in the simulations from the model
 ppc_stat(y_values,
          yrep_prior_matrix,
          stat = "prop_ones",
          binwidth = 0.005)
 
-ppc_stat_grouped(y_values,
-                 yrep_prior_matrix,
-                 stat = "prop_ones",
-                 penguins_for_modelling$sex,
-                 binwidth = 0.005)
-
 # there are other uses of PPC
 
-# how to check your priors
+# how to check your priors:
 sims_params_prior <- calculate(
-  probability_female[1,],
-  eta[1,],
+  # parameter values
   intercept,
   coef_flipper_length,
   coef_body_mass,
+  # estimate of first observation on link scale
+  eta[1,],
+  # estimate of probability for first observation
+  probability_female[1,],
   nsim = 500
 )
 
-hist(sims_params_prior$`probability_female[1, ]`)
-hist(sims_params_prior$`eta[1, ]`)
+par(mfrow = c(3, 2))
 hist(sims_params_prior$intercept)
 hist(sims_params_prior$coef_flipper_length)
 hist(sims_params_prior$coef_body_mass)
+hist(sims_params_prior$`eta[1, ]`)
+hist(sims_params_prior$`probability_female[1, ]`)
 
 # your turn: how to visualise your posterior samples
 ###
