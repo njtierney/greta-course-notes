@@ -1,17 +1,17 @@
 library(palmerpenguins)
 library(tidyverse)
 
-
 # we are going to build a model to predict the sex of an individual penguin
 # based on measurements of that individual.
 
 # this is a thing people do
 # https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081
-# There is some really nice data extracted from this paper
-# It also has some great artwork:
-# https://github.com/allisonhorst/palmerpenguins#artwork
-# here's the data from that paper
+
+# here's the data from that paper (from the palmerpenguins package)
 head(penguins)
+
+# The package also has some great artwork:
+# https://github.com/allisonhorst/palmerpenguins#artwork
 
 # before we can fit a model, we need to tidy up the data and transform some variables
 penguins_for_modelling <- penguins %>%
@@ -32,20 +32,20 @@ penguins_for_modelling <- penguins %>%
     .after = island
   )
 
-## an aside - if you haven't seen `across` before, here is what it is
-## equivalent to:
-    ## penguins %>%
-    ##   # remove missing value records
-    ##   drop_na() %>%
-    ##   # rescale the length and mass variables to make the coefficient priors easier
-    ##   # to define
-    ##   mutate(
-    ##       bill_length_mm_scaled = scale(bill_length_mm_scaled),
-    ##       bill_depth_mm_scaled = scale(bill_depth_mm_scaled),
-    ##       flipper_length_mm_scaled = scale(flipper_length_mm_scaled),
-    ##       body_mass_g_scaled = scale(body_mass_g_scaled)
-    ##     )
-    ##   )
+# an aside - if you haven't seen `across` before, here is what it is
+# equivalent to:
+#  penguins %>%
+#    # remove missing value records
+#    drop_na() %>%
+#    # rescale the length and mass variables to make the coefficient priors easier
+#    # to define
+#    mutate(
+#         bill_length_mm_scaled = scale(bill_length_mm_scaled),
+#         bill_depth_mm_scaled = scale(bill_depth_mm_scaled),
+#         flipper_length_mm_scaled = scale(flipper_length_mm_scaled),
+#         body_mass_g_scaled = scale(body_mass_g_scaled)
+#       )
+#    )
 
 # this is the model we are going to fit to start with:
 
