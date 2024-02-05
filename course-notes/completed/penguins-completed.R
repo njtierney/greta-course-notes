@@ -166,6 +166,11 @@ penguins_prediction <- sims$probability_female_pred[, , 1] %>%
   )
 
 # plot the conditional effect of bodymass, for the mean flipper length
+# recall: the mean flipper length has been scaled to have mean of 0 and SD of 1
+# also recall: we created a sequence from the min to max scaled flipper length
+# so although we want to say "filter to the mean value, which is zero", we
+# instead say: "filter to the mean value, which is the smallest absolute value"
+# which will be very close to zero.
 penguins_prediction_body_mass_conditional <- penguins_prediction %>%
   filter(
     abs(flipper_length_mm_scaled) == min(abs(flipper_length_mm_scaled))
