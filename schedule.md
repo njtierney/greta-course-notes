@@ -5,7 +5,7 @@ This course runs over one day, Wednesday 7th February 2024, from 9am - 4:30pm.
 ## 9-10am
 
 - Acknowledgement of country
-- Introductions, code of conduct
+- Introductions, [code of conduct](code-of-conduct.md)
 - Introduction to `greta`
 - Setup on RStudio cloud
 - Installation handling:
