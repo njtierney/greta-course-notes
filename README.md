@@ -24,7 +24,7 @@ We will start with simple linear models on real ecological data, and gradually e
 
 ## Opening up the course locally on your machine
 
-If you plan on following along locally on your machine instead of on posit cloud, you can download the course materials by coping this link and running it inside an RStudio session:
+If you plan on following along locally on your machine instead of on posit cloud, you can download the course materials by copying this link and running it inside an RStudio session:
 
 ```r
 use_course("https://github.com/njtierney/greta-course-notes/archive/refs/heads/master.zip")
